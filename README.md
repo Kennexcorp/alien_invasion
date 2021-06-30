@@ -13,6 +13,7 @@ loses a ship. If the player loses three ships, the game ends.
 
 ## Installation Steps
 - python3 -m pip install --user pygame
+- python3 alien_invasion.py
 
 ## Aims and Objectives
 - Understanding concepts of building 2D games in python
