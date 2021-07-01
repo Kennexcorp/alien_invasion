@@ -32,7 +32,7 @@ class AlienInvasion:
             self.check_events()
             self.ship.update()
             self.bullets.update()
-            self._remove_bullets()
+            self._update_bullets()
             self._update_aliens()
             self.update_screen()
 
@@ -75,20 +75,33 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
     
-    def _draw_bullet(self):
+    def _update_bullets(self):
+
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
 
-    def _remove_bullets(self):
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True
+        )
+
+    # def _draw_bullet(self):
+    #     for bullet in self.bullets.sprites():
+    #         bullet.draw_bullet()
+
+    # def _remove_bullets(self):
+    #     for bullet in self.bullets.copy():
+    #         if bullet.rect.bottom <= 0:
+    #             self.bullets.remove(bullet)
 
     def update_screen(self):
         # Redraw the screen during each pass through the loop
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
-        self._draw_bullet() 
+        self._update_bullets() 
         self.aliens.draw(self.screen)
 
         pygame.display.flip()
