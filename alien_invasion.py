@@ -33,6 +33,7 @@ class AlienInvasion:
             self.ship.update()
             self.bullets.update()
             self._remove_bullets()
+            self._update_aliens()
             self.update_screen()
 
     def check_events(self):
@@ -115,6 +116,9 @@ class AlienInvasion:
         alien.rect.x = alien.x
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
+
+    def _update_aliens(self):
+        self.aliens.update()
     
     
 
