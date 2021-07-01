@@ -88,14 +88,10 @@ class AlienInvasion:
             self.bullets, self.aliens, True, True
         )
 
-    # def _draw_bullet(self):
-    #     for bullet in self.bullets.sprites():
-    #         bullet.draw_bullet()
-
-    # def _remove_bullets(self):
-    #     for bullet in self.bullets.copy():
-    #         if bullet.rect.bottom <= 0:
-    #             self.bullets.remove(bullet)
+        if not self.aliens:
+            # Destroy existing bullets and create new fleet
+            self.bullets.empty()
+            self._create_fleet()
 
     def update_screen(self):
         # Redraw the screen during each pass through the loop
@@ -140,6 +136,7 @@ class AlienInvasion:
         for alien in self.aliens.sprites():
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
+        
 
     def _update_aliens(self):
         self._check_fleet_edges()
